@@ -15,7 +15,7 @@ int main()
 	VideoMode vm(1920, 1080);
 	// Create and open a window for the game
 	RenderWindow window(vm, "Chaos Game!!", Style::Default);
-	
+
 	vector<Vector2f> vertices;
 	vector<Vector2f> points;
 
@@ -42,31 +42,31 @@ int main()
 		Event event;
 		while (window.pollEvent(event))
 		{
-		    if (event.type == Event::Closed)
-		    {
-					// Quit the game when the window is closed
-					window.close();
-		    }
-		    if (event.type == sf::Event::MouseButtonPressed)
-		    {
-			if (event.mouseButton.button == sf::Mouse::Left)
+			if (event.type == Event::Closed)
 			{
-			    std::cout << "the left button was pressed" << std::endl;
-			    std::cout << "mouse x: " << event.mouseButton.x << std::endl;
-			    std::cout << "mouse y: " << event.mouseButton.y << std::endl;
-	
-			    if(vertices.size() < 3)
-			    {
-				vertices.push_back(Vector2f(event.mouseButton.x, event.mouseButton.y));
-			    }
-			    else if(points.size() == 0)
-			    {
-					points.push_back(Vector2f(event.mouseButton.x, event.mouseButton.y));
-				///fourth click
-				///push back to points vector
-			    }
+				// Quit the game when the window is closed
+				window.close();
 			}
-		    }
+			if (event.type == sf::Event::MouseButtonPressed)
+			{
+				if (event.mouseButton.button == sf::Mouse::Left)
+				{
+					std::cout << "the left button was pressed" << std::endl;
+					std::cout << "mouse x: " << event.mouseButton.x << std::endl;
+					std::cout << "mouse y: " << event.mouseButton.y << std::endl;
+
+					if (vertices.size() < 3)
+					{
+						vertices.push_back(Vector2f(event.mouseButton.x, event.mouseButton.y));
+					}
+					else if (points.size() == 0)
+					{
+						points.push_back(Vector2f(event.mouseButton.x, event.mouseButton.y));
+						///fourth click
+						///push back to points vector
+					}
+				}
+			}
 		}
 		if (Keyboard::isKeyPressed(Keyboard::Escape))
 		{
@@ -77,35 +77,35 @@ int main()
 		Update
 		****************************************
 		*/
-	
-		if(points.size() > 0)
+
+		if (points.size() > 0)
 		{
 			int selectedvert = rand() % 3;
 			Vector2f vertcord = vertices[selectedvert];
 			Vector2f curpoint = points.back();
-			Vector2f midpoint((vertcord.x + curpoint.x) / 2,(vertcord.y + curpoint.y) / 2);
+			Vector2f midpoint((vertcord.x + curpoint.x) / 2, (vertcord.y + curpoint.y) / 2);
 			points.push_back(midpoint);
-			
-			
-		    ///generate more point(s)
-		    ///select random vertex
-		    ///calculate midpoint between random vertex and the last point in the vector
-		    ///push back the newly generated coord.
+
+
+			///generate more point(s)
+			///select random vertex
+			///calculate midpoint between random vertex and the last point in the vector
+			///push back the newly generated coord.
 		}
 
-	
+
 		/*
 		****************************************
 		Draw
 		****************************************
 		*/
 		window.clear();
-		for(int i = 0; i < vertices.size(); i++)
+		for (int i = 0; i < vertices.size(); i++)
 		{
-		    RectangleShape rect(Vector2f(10,10));
-		    rect.setPosition(Vector2f(vertices[i].x, vertices[i].y));
-		    rect.setFillColor(Color::Blue);
-		    window.draw(rect);
+			RectangleShape rect(Vector2f(10, 10));
+			rect.setPosition(Vector2f(vertices[i].x, vertices[i].y));
+			rect.setFillColor(Color::Blue);
+			window.draw(rect);
 		}
 		if (points.size() > 0)
 		{
