@@ -85,7 +85,7 @@ int main()
 			Vector2f curpoint = points.back();
 			Vector2f midpoint((vertcord.x + curpoint.x) / 2,(vertcord.y + curpoint.y) / 2);
 			points.push_back(midpoint);
-			cout << "your mom";
+			
 			
 		    ///generate more point(s)
 		    ///select random vertex
